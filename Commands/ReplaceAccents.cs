@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace VsPsReplaceAccents
@@ -24,19 +26,56 @@ namespace VsPsReplaceAccents
 
             Dictionary<char, string> charMappings = settings.SpecialCharacterMappings.ToDictionary();
 
+            if (charMappings == null)
+            {
+                charMappings = new Dictionary<char, string>();
+            }
+
 
             // Get all selections from multi-cursor
             NormalizedSnapshotSpanCollection selections = docView.TextView.Selection.SelectedSpans;
 
-            // Process selections in reverse order to avoid changing spans that affect later replacements
-            foreach (SnapshotSpan selection in selections.OrderByDescending(span => span.Start.Position))
+            if (selections.Count > 0 && !selections.All(span => span.IsEmpty))
             {
-                if (!selection.IsEmpty)
+                IOrderedEnumerable<SnapshotSpan> reversedSelections = selections.Where(span => !span.IsEmpty).OrderByDescending(span => span.Start.Position);
+
+                // Process all non-empty selections in reverse order
+                foreach (SnapshotSpan selection in reversedSelections)
                 {
-                    docView.TextBuffer.Replace(
-                        selection,
-                        RemoveAccents(selection.GetText(), charMappings)
-                    );
+                    string lineText = selection.GetText();
+
+                    string processedText = RemoveAccents(lineText, charMappings);
+
+                    // Only replace if something changed
+                    if (lineText != processedText)
+                    {
+                        docView.TextBuffer.Replace(selection, processedText);
+                    }
+                }
+            }
+            else
+            {
+                // Process the entire document line by line
+                using (ITextEdit edit = docView.TextBuffer.CreateEdit())
+                {
+                    ITextSnapshot snapshot = docView.TextBuffer.CurrentSnapshot;
+
+                    for (int idx = 0; idx < snapshot.LineCount; idx++)
+                    {
+                        ITextSnapshotLine line = snapshot.GetLineFromLineNumber(idx);
+
+                        string lineText = line.GetText();
+
+                        string processedText = RemoveAccents(lineText, charMappings);
+
+                        // Only replace if something changed
+                        if (lineText != processedText)
+                        {
+                            edit.Replace(line.Start, line.Length, processedText);
+                        }
+                    }
+
+                    edit.Apply();
                 }
             }
         }
@@ -67,7 +106,7 @@ namespace VsPsReplaceAccents
                     if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
                     {
                         // Apply character mapping if available
-                        if (charMappings.TryGetValue(c, out string replacement))
+                        if (charMappings != null && charMappings.TryGetValue(c, out string replacement))
                         {
                             result.Append(replacement);
                         }

@@ -61,10 +61,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="license.rtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="releasenotes.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -73,6 +69,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="LICENSE" />
+    <Content Include="license.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <None Include="README.md" />
     <None Include="Resources\Icon.ai" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
