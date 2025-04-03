@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" ?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VsPsReplaceAccents.83246dfa-cdd6-4a6e-a093-81c8f9ead99e" Version="0.0.1" Language="en-US" Publisher="Zsolt Oroszlány" />
+        <Identity Id="VsPsReplaceAccents.83246dfa-cdd6-4a6e-a093-81c8f9ead99e" Version="0.0.1" Language="en-US" Publisher="Playful Sparkle" />
         <DisplayName>Replace Accents</DisplayName>
         <Description xml:space="preserve">Remove accents/diacritics from text to generate clean text through Unicode normalization and custom character mappings.</Description>
         <License>license.rtf</License>
@@ -12,11 +12,8 @@
         <Tags>ascii, diacritics, accent, letter, alphabet, remove, replace, playfulsparkle, visualstudio, extension</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0,18.0)">
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0,18.0)">
             <ProductArchitecture>amd64</ProductArchitecture>
-        </InstallationTarget>
-        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Community">
-            <ProductArchitecture>x86</ProductArchitecture>
         </InstallationTarget>
     </Installation>
     <Prerequisites>
