@@ -22,7 +22,7 @@ namespace VsPsReplaceAccents
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int MyMenuGroup = 0x0001;
-        public const int ReplaceAccents = 0x0100;
+        public const int VsMenuGroup = 0x0001;
+        public const int VsReplaceAccents = 0x0100;
     }
 }

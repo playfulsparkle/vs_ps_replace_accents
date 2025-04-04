@@ -19,6 +19,12 @@ namespace VsPsReplaceAccents
         [Description("Custom mappings for special characters (e.g., 'ß' to 'ss', 'æ' to 'ae')")]
         [Editor(typeof(CharMappingCollectionEditor), typeof(UITypeEditor))]
         public CharMappingCollection SpecialCharacterMappings { get; set; } = new CharMappingCollection();
+
+        [Category("Replace Accents")]
+        [DisplayName("Use Default Mappings")]
+        [Description("Use default character mappings in addition to custom mappings")]
+        [DefaultValue(true)]
+        public bool UseDefaultMappings { get; set; } = true;
     }
 
     [Serializable]
@@ -69,9 +75,9 @@ namespace VsPsReplaceAccents
         // Helper method to convert to Dictionary
         public Dictionary<char, string> ToDictionary()
         {
-            var dict = new Dictionary<char, string>();
+            Dictionary<char, string> dict = new Dictionary<char, string>();
 
-            foreach (var mapping in this)
+            foreach (CharMapping mapping in this)
             {
                 if (!string.IsNullOrEmpty(mapping.Character) && mapping.Character.Length == 1)
                 {

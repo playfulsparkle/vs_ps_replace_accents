@@ -30,6 +30,10 @@ If you encounter any of these or other issues, please report them on the [GitHub
 
 ## Release Notes
 
+### 0.0.2
+
+* Added default mappings
+
 ### 0.0.1
 
 * Initial public release of the **Playful Sparkle: Replace Accents** extension for Visual Studio.

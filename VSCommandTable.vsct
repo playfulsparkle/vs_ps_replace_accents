@@ -8,19 +8,19 @@
 
 	<Commands package="VsPsReplaceAccents">
 		<Groups>
-			<Group guid="VsPsReplaceAccents" id="MyMenuGroup" priority="0x0600">
+			<Group guid="VsPsReplaceAccents" id="VsMenuGroup" priority="0x0600">
 				<Parent guid="VSMainMenu" id="Edit"/>
 			</Group>
 		</Groups>
 
 		<Buttons>
-			<Button guid="VsPsReplaceAccents" id="ReplaceAccents" priority="0x0100" type="Button">
-				<Parent guid="VsPsReplaceAccents" id="MyMenuGroup" />
+			<Button guid="VsPsReplaceAccents" id="VsReplaceAccents" priority="0x0100" type="Button">
+				<Parent guid="VsPsReplaceAccents" id="VsMenuGroup" />
 				<Icon guid="ImageCatalogGuid" id="DataPager" />
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<Strings>
 					<ButtonText>Replace Accents</ButtonText>
-					<LocCanonicalName>.VsPsReplaceAccents.ReplaceAccents</LocCanonicalName>
+					<LocCanonicalName>.VsPsReplaceAccents.VsReplaceAccents</LocCanonicalName>
 				</Strings>
 			</Button>
 		</Buttons>
@@ -28,8 +28,8 @@
 
 	<Symbols>
 		<GuidSymbol name="VsPsReplaceAccents" value="{8f2ecea4-4d8d-4c98-accd-a0c6f83f9fe7}">
-			<IDSymbol name="MyMenuGroup" value="0x0001" />
-			<IDSymbol name="ReplaceAccents" value="0x0100" />
+			<IDSymbol name="VsMenuGroup" value="0x0001" />
+			<IDSymbol name="VsReplaceAccents" value="0x0100" />
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

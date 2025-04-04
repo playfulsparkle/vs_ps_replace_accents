@@ -1,0 +1,15 @@
+Release Notes
+-------------
+
+All notable changes to the Playful Sparkle: Replace Accents extension will be documented in this file.
+
+0.0.2
+-----
+
+- Added default mappings
+
+0.0.1
+-----
+- Initial public release of the Playful Sparkle: Replace Accents extension for Visual Studio.
+- Implemented core text processing functionality leveraging Unicode Normalization Form D for the replacement of accented characters with their unaccented counterparts. This includes handling a wide range of diacritical marks present in Latin-based scripts.
+- Introduced support for user-defined custom character mappings via the Special Character Mappings setting, accessible through Tools → Options → Replace Accents. This feature allows users to specify additional or override default replacement rules for specific characters, providing enhanced flexibility in text normalization.

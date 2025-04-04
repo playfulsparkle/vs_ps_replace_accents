@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
+using VsPsReplaceAccents.Commands;
 
 namespace VsPsReplaceAccents
 {
-    [Command(PackageIds.ReplaceAccents)]
+    [Command(PackageIds.VsReplaceAccents)]
     internal sealed class ReplaceAccents : BaseCommand<ReplaceAccents>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
@@ -20,17 +19,32 @@ namespace VsPsReplaceAccents
                 return;
             }
 
+            await VS.StatusBar.StartAnimationAsync(StatusAnimation.Find);
 
             // Get settings
             ReplaceAccentsSettings settings = await ReplaceAccentsSettings.GetLiveInstanceAsync();
 
-            Dictionary<char, string> charMappings = settings.SpecialCharacterMappings.ToDictionary();
 
-            if (charMappings == null)
+            Dictionary<char, string> charMappings = new Dictionary<char, string>();
+
+            // Add default mappings if enabled
+            if (settings.UseDefaultMappings)
             {
-                charMappings = new Dictionary<char, string>();
+                charMappings = DefaultCharsMappings.groups;
             }
 
+            Dictionary<char, string> userCharMappings = settings.SpecialCharacterMappings.ToDictionary();
+
+            if (userCharMappings != null)
+            {
+                foreach (KeyValuePair<char, string> pair in userCharMappings)
+                {
+                    charMappings[pair.Key] = pair.Value;
+                }
+            }
+
+
+            bool wasModified = false;
 
             // Get all selections from multi-cursor
             NormalizedSnapshotSpanCollection selections = docView.TextView.Selection.SelectedSpans;
@@ -50,6 +64,8 @@ namespace VsPsReplaceAccents
                     if (lineText != processedText)
                     {
                         docView.TextBuffer.Replace(selection, processedText);
+
+                        wasModified = true;
                     }
                 }
             }
@@ -72,12 +88,25 @@ namespace VsPsReplaceAccents
                         if (lineText != processedText)
                         {
                             edit.Replace(line.Start, line.Length, processedText);
+
+                            wasModified = true;
                         }
                     }
 
-                    edit.Apply();
+                    if (wasModified)
+                    {
+                        edit.Apply();
+                    }
                 }
             }
+
+
+            if (wasModified)
+            {
+                await VS.StatusBar.ShowMessageAsync("Successfully replaced accents in the document.");
+            }
+
+            await VS.StatusBar.EndAnimationAsync(StatusAnimation.Find);
         }
 
         /// <summary>

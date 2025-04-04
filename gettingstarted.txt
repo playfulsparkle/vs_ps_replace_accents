@@ -1,0 +1,51 @@
+Getting Started with Playful Sparkle: Replace Accents
+=====================================================
+
+This guide will help you quickly get started with the Playful Sparkle: Replace Accents extension for Visual Studio.
+
+Installation
+------------
+1.	Open Visual Studio: Launch your Visual Studio development environment.
+2.	Navigate to Extensions: Go to the Extensions menu at the top of the Visual Studio window.
+3.	Manage Extensions: Select Manage Extensions from the dropdown menu.
+4.	Search for the Extension: In the Manage Extensions dialog, ensure the Online tab is selected on the left. In the search bar on the right, type "Playful Sparkle: Replace Accents".
+5.	Install the Extension: Once you find the extension in the search results, click the Download button.
+6.	Close and Restart: After the download is complete, close all instances of Visual Studio. The extension will be installed when you restart Visual Studio. Follow any prompts that may appear during the installation process.
+
+Using the Extension
+-------------------
+1.	Open a Document: Open the text document in Visual Studio where you want to replace accented characters.
+2.	Select Text (Optional): 
+    - To replace accents in the entire document, you don't need to make any selection.
+    - To replace accents in a specific part of the document, select the desired text range.
+    - To replace accents in multiple non-contiguous areas, use Visual Studio's multi-cursor feature (usually by holding Ctrl+Alt while selecting).
+3.	Access the Replace Accents Command: Go to the Edit menu at the top of the Visual Studio window.
+4.	Click Replace Accents: Select Replace Accents from the Edit menu.
+
+The extension will process the selected text (or the entire document if no selection was made) and replace the accented characters with their unaccented counterparts.
+
+Customizing Character Mappings
+------------------------------
+The extension allows for custom character replacements beyond the standard Unicode normalization. To configure these mappings:
+
+1.	Open Options: Go to the Tools menu in Visual Studio and select Options.
+2.	Navigate to Replace Accents Settings: In the Options dialog, find and select the Replace Accents category on the left.
+3.	Special Character Mappings: Under the Replace Accents settings, you will find the Special Character Mappings option.
+4.	Configure Mappings: Click the ellipsis button (...) next to Special Character Mappings. This will open a collection editor where you can add, edit, or remove custom mappings. 
+    - Click Add to create a new mapping.
+    - In the new item, enter the accented Character you want to replace.
+    - Enter the Replacement string (e.g., "ss" for "ß").
+    - Click OK to save your custom mappings.
+5.	Apply Custom Mappings: Once configured, these custom mappings will be applied after the standard accent removal process when you use the Replace Accents command.
+
+Example
+-------
+
+Let's say you have the following text in your document:
+
+Before: Ceci est un texte avec des caractères accentués comme éàçüö.
+After: Ceci est un texte avec des caracteres accentues comme eauo.
+
+After using the "Replace Accents" command with a custom mapping for "ü" to "ue":
+    Ceci est un texte avec des caracteres accentues comme eaueo.
+    Enjoy using Playful Sparkle: Replace Accents to streamline your text processing in Visual Studio!
