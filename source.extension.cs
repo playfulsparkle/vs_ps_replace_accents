@@ -12,7 +12,7 @@ namespace VsPsReplaceAccents
         public const string Name = "Replace Accents";
         public const string Description = @"Remove accents/diacritics from text to generate clean text through Unicode normalization and custom character mappings.";
         public const string Language = "en-US";
-        public const string Version = "0.0.2";
+        public const string Version = "0.0.3";
         public const string Author = "Playful Sparkle";
         public const string Tags = "ascii, diacritics, accent, letter, alphabet, remove, replace, playfulsparkle, visualstudio, extension";
         public const bool IsPreview = false;

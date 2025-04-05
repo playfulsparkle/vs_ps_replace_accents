@@ -1,4 +1,4 @@
-# Playful Sparkle: Replace Accents
+﻿# Playful Sparkle: Replace Accents
 
 **Playful Sparkle: Replace Accents** is your go-to Visual Studio extension for effortlessly removing accents from text. Utilizing Unicode normalization and customizable mappings, this tool ensures clean text processing for code, databases, and more. Quickly replace accented characters across your entire document, selections, or with multi-cursor.
 
@@ -22,13 +22,18 @@
 
 * **Performance with Large Documents**: The extension processes the selected text content in memory after applying Unicode normalization. For very large selections or entire documents, this in-memory processing, along with the subsequent iteration through each character, could lead to increased memory consumption and processing time within Visual Studio. Users might experience a temporary slowdown or unresponsiveness in the Visual Studio editor, especially with files containing a very high character count or when applying the operation to a large selection. The extension processes selections in reverse order to minimize the impact of replacements on subsequent selections.
 
-* **Custom Mapping Considerations**: Custom mappings are defined in the **Special Character Mappings** setting under **Tools** -> **Options** -> **Replace Accents**. These mappings are applied *after* the Unicode normalization and diacritic removal steps. This implies that custom mappings should generally target the base characters (those remaining after the diacritics are removed). Conflicts in custom mappings could arise if multiple mappings target the same base character, leading to the last defined mapping taking precedence. Additionally, if a custom mapping is intended to handle a character that the normalization process already modifies or removes, the custom mapping might not behave as expected. Users should carefully consider the interaction between Unicode normalization and their custom mappings when configuring the **Special Character Mappings**.
+* **Custom Mapping Considerations**: Custom mappings are defined in the **Special Character Mappings** setting under **Tools** -> **Options** -> **Playful Sparkle** -> **Replace Accents**. These mappings are applied *after* the Unicode normalization and diacritic removal steps. This implies that custom mappings should generally target the base characters (those remaining after the diacritics are removed). Conflicts in custom mappings could arise if multiple mappings target the same base character, leading to the last defined mapping taking precedence. Additionally, if a custom mapping is intended to handle a character that the normalization process already modifies or removes, the custom mapping might not behave as expected. Users should carefully consider the interaction between Unicode normalization and their custom mappings when configuring the **Special Character Mappings**.
 
 If you encounter any of these or other issues, please report them on the [GitHub Issues page](https://github.com/playfulsparkle/vs_ps_replace_accents/issues) with detailed steps to reproduce the problem.
 
 ---
 
 ## Release Notes
+
+### 0.0.3
+
+* Improved utilization of the **Playful Sparkle: Transliterate Library**, introducing enhanced accent removal and automatic conversion of emojis to their textual equivalents.
+** The default extension mapping has been discontinued and replaced by the mapping functionality provided by the **Playful Sparkle: Transliterate Library**.
 
 ### 0.0.2
 
@@ -38,7 +43,7 @@ If you encounter any of these or other issues, please report them on the [GitHub
 
 * Initial public release of the **Playful Sparkle: Replace Accents** extension for Visual Studio.
 * Implemented core text processing functionality leveraging Unicode Normalization Form D for the replacement of accented characters with their unaccented counterparts. This includes handling a wide range of diacritical marks present in Latin-based scripts.
-* Introduced support for user-defined custom character mappings via the **Special Character Mappings** setting, accessible through **Tools** -> **Options** -> **Replace Accents**. This feature allows users to specify additional or override default replacement rules for specific characters, providing enhanced flexibility in text normalization.
+* Introduced support for user-defined custom character mappings via the **Special Character Mappings** setting, accessible through **Tools** -> **Options** -> **Playful Sparkle** -> **Replace Accents**. This feature allows users to specify additional or override default replacement rules for specific characters, providing enhanced flexibility in text normalization.
 
 ---
 

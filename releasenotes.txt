@@ -1,7 +1,13 @@
-Release Notes
+﻿Release Notes
 -------------
 
 All notable changes to the Playful Sparkle: Replace Accents extension will be documented in this file.
+
+0.0.3
+-----
+
+- Improved utilization of the Playful Sparkle: Transliterate Library, introducing enhanced accent removal and automatic conversion of emojis to their textual equivalents.
+- The default extension mapping has been discontinued and replaced by the mapping functionality provided by the Playful Sparkle: Transliterate Library.
 
 0.0.2
 -----

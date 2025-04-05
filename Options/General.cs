@@ -73,19 +73,23 @@ namespace VsPsReplaceAccents
         #endregion
 
         // Helper method to convert to Dictionary
-        public Dictionary<char, string> ToDictionary()
+        public Dictionary<string, string> ToDictionary()
         {
-            Dictionary<char, string> dict = new Dictionary<char, string>();
+            Dictionary<string, string> result = new Dictionary<string, string>();
 
             foreach (CharMapping mapping in this)
             {
-                if (!string.IsNullOrEmpty(mapping.Character) && mapping.Character.Length == 1)
+                if (
+                    !string.IsNullOrEmpty(mapping.Character) &&
+                    mapping.Character.Length == 1 &&
+                    !string.IsNullOrEmpty(mapping.Replacement)
+                )
                 {
-                    dict[mapping.Character[0]] = mapping.Replacement;
+                    result[mapping.Character] = mapping.Replacement;
                 }
             }
 
-            return dict;
+            return result;
         }
     }
 
@@ -111,7 +115,12 @@ namespace VsPsReplaceAccents
 
         public override string ToString()
         {
-            return $"{Character} -> {Replacement}";
+            if (!string.IsNullOrWhiteSpace(Character) && !string.IsNullOrWhiteSpace(Replacement))
+            {
+                return $"{Character} -> {Replacement}";
+            }
+
+            return string.Empty;
         }
     }
 

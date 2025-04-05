@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.Text;
-using VsPsReplaceAccents.Commands;
+using PlayfulSparkle;
 
 namespace VsPsReplaceAccents
 {
@@ -25,23 +26,7 @@ namespace VsPsReplaceAccents
             ReplaceAccentsSettings settings = await ReplaceAccentsSettings.GetLiveInstanceAsync();
 
 
-            Dictionary<char, string> charMappings = new Dictionary<char, string>();
-
-            // Add default mappings if enabled
-            if (settings.UseDefaultMappings)
-            {
-                charMappings = DefaultCharsMappings.groups;
-            }
-
-            Dictionary<char, string> userCharMappings = settings.SpecialCharacterMappings.ToDictionary();
-
-            if (userCharMappings != null)
-            {
-                foreach (KeyValuePair<char, string> pair in userCharMappings)
-                {
-                    charMappings[pair.Key] = pair.Value;
-                }
-            }
+            Dictionary<string, string> charMappings = settings.SpecialCharacterMappings.ToDictionary();
 
 
             bool wasModified = false;
@@ -57,8 +42,26 @@ namespace VsPsReplaceAccents
                 foreach (SnapshotSpan selection in reversedSelections)
                 {
                     string lineText = selection.GetText();
+                    string processedText = lineText;
 
-                    string processedText = RemoveAccents(lineText, charMappings);
+                    if (string.IsNullOrWhiteSpace(lineText))
+                    {
+                        continue;
+                    }
+
+                    try
+                    {
+                        processedText = await Transliterate.DecomposeAsync(
+                            lineText,
+                            Transliterate.Normalization.Decompose,
+                            settings.UseDefaultMappings,
+                            charMappings
+                        );
+                    }
+                    catch (Exception)
+                    {
+
+                    }
 
                     // Only replace if something changed
                     if (lineText != processedText)
@@ -81,8 +84,26 @@ namespace VsPsReplaceAccents
                         ITextSnapshotLine line = snapshot.GetLineFromLineNumber(idx);
 
                         string lineText = line.GetText();
+                        string processedText = lineText;
 
-                        string processedText = RemoveAccents(lineText, charMappings);
+                        if (string.IsNullOrWhiteSpace(lineText))
+                        {
+                            continue;
+                        }
+
+                        try
+                        {
+                            processedText = await Transliterate.DecomposeAsync(
+                                lineText, 
+                                Transliterate.Normalization.Decompose, 
+                                settings.UseDefaultMappings, 
+                                charMappings
+                            );
+                        }
+                        catch (Exception)
+                        {
+
+                        }
 
                         // Only replace if something changed
                         if (lineText != processedText)
@@ -107,51 +128,6 @@ namespace VsPsReplaceAccents
             }
 
             await VS.StatusBar.EndAnimationAsync(StatusAnimation.Find);
-        }
-
-        /// <summary>
-        /// Removes accent marks and applies character mappings to the input text.
-        /// </summary>
-        /// <param name="text">The input text to process</param>
-        /// <param name="charMappings">Optional dictionary of character mappings</param>
-        /// <returns>The processed text with accents removed and mappings applied</returns>
-        private static string RemoveAccents(string text, Dictionary<char, string> charMappings = null)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return text; // Handle empty or null input
-            }
-
-            try
-            {
-                // Remove diacritics (accent marks)
-                string normalized = text.Normalize(NormalizationForm.FormD);
-
-                // Remove combining marks
-                StringBuilder result = new StringBuilder();
-
-                foreach (char c in normalized)
-                {
-                    if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                    {
-                        // Apply character mapping if available
-                        if (charMappings != null && charMappings.TryGetValue(c, out string replacement))
-                        {
-                            result.Append(replacement);
-                        }
-                        else
-                        {
-                            result.Append(c);
-                        }
-                    }
-                }
-
-                return result.ToString();
-            }
-            catch (Exception)
-            {
-                return text;
-            }
         }
     }
 }

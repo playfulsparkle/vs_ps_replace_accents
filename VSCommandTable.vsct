@@ -9,7 +9,7 @@
 	<Commands package="VsPsReplaceAccents">
 		<Groups>
 			<Group guid="VsPsReplaceAccents" id="VsMenuGroup" priority="0x0600">
-				<Parent guid="VSMainMenu" id="Edit"/>
+								<Parent guid="VSMainMenu" id="Edit"/>
 			</Group>
 		</Groups>
 
