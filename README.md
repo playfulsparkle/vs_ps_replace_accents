@@ -30,6 +30,13 @@ If you encounter any of these or other issues, please report them on the [GitHub
 
 ## Release Notes
 
+### 0.0.4
+
+**Improvements:**
+    - **Message Dialogs:** Both successful and unsuccessful accent replacements now display a message dialog.
+    - **Responsive Progress:** Enhanced responsiveness for the document processing progress dialog.
+    - **Updated Library:** Playful Sparkle: Transliterate library updated to v0.0.14.
+
 ### 0.0.3
 
 * Improved utilization of the **Playful Sparkle: Transliterate Library**, introducing enhanced accent removal and automatic conversion of emojis to their textual equivalents.
