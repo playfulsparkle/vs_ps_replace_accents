@@ -3,6 +3,14 @@
 
 All notable changes to the Playful Sparkle: Replace Accents extension will be documented in this file.
 
+0.0.4
+-----
+
+Improvements:
+    - Message Dialogs: Both successful and unsuccessful accent replacements now display a message dialog.
+    - Responsive Progress: Enhanced responsiveness for the document processing progress dialog.
+    - Updated Library: Playful Sparkle: Transliterate library updated to v0.0.14.
+
 0.0.3
 -----
 
