@@ -1,0 +1,95 @@
+name: 🐞 Bug Report
+description: Create a report to help us improve the Replace Accents Visual Studio extension
+title: "Bug Report Title"
+labels: []
+assignees:
+  - zsoltoroszlany82
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the details below to help us understand and fix the issue.
+
+  - type: textarea
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+      placeholder: e.g. The extension crashes when replacing accents in a large file.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: Provide the steps to reproduce the behavior. Include specific text or code snippets if possible.
+      placeholder: |
+        1. Open a file with content: `...`
+        2. Select the text range: `...`
+        3. Go to Edit -> Replace Accents.
+        4. Observe the error or unexpected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: The selected text should have had its accents removed without issues.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Error Logs or Messages
+      description: Paste any relevant error messages, stack traces, or output from the Visual Studio Output window here.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Screenshots or Video
+      description: If applicable, add screenshots or a video to help explain your problem.
+    validations:
+      required: false
+
+  - type: input
+    attributes:
+      label: Replace Accents Version
+      description: What version of the extension are you using? (Found in Extensions -> Manage Extensions)
+      placeholder: e.g. 0.0.4
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Visual Studio Version
+      description: Which version and edition of Visual Studio are you using? (Found in Help -> About Microsoft Visual Studio)
+      placeholder: e.g. Visual Studio 2022 Professional (Version 17.8.5)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Operating System
+      description: What operating system are you running Visual Studio on?
+      placeholder: e.g. Windows 11 (Build 22H2)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Relevant Extension Settings
+      description: If you are using custom mappings or other specific settings, please list them here (Tools -> Options -> Playful Sparkle -> Replace Accents).
+      placeholder: |
+        - Special Character Mappings: { "ü": "ue", "ß": "ss" }
+        - Other settings: ...
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here (e.g., file type, project type).
+    validations:
+      required: false
